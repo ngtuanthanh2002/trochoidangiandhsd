@@ -540,6 +540,15 @@ section.intro-video-section {
     display: block;
 }
 
+/* react-youtube: lấp đầy khung 16:9 */
+.intro-video-youtube,
+.intro-video-youtube > div {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
 /* =========================================================
    4. GAMES GRID
    ========================================================= */
