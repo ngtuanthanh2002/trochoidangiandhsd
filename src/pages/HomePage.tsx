@@ -109,8 +109,7 @@ export default function HomePage() {
                   cộng đồng của con người qua nhiều thế hệ.
                 </p>
                 <p className="intro-video-text">
-                  Video này là tuyển chọn những khoảnh khắc thú vị nhất của các <strong>trò chơi dân gian</strong> – từ
-                  cổ xưa đến hiện đại, từ Việt Nam đến nhiều nền văn hóa khác nhau. Mỗi trò chơi không chỉ mang tính
+                  Video này là tuyển chọn những khoảnh khắc thú vị nhất của các <strong>trò chơi dân gian.</strong> Mỗi trò chơi không chỉ mang tính
                   giải trí, mà còn ẩn chứa những bài học về sự khéo léo, tinh thần đồng đội và bản sắc dân tộc.
                 </p>
               </div>
