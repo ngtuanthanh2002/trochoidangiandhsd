@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 
 type Layout = 'home' | 'detail';
 
 export default function SiteHeader({ layout = 'home' }: { layout?: Layout }) {
+  const { pathname } = useLocation();
   const [navOpen, setNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(layout === 'detail');
 
@@ -34,6 +35,13 @@ export default function SiteHeader({ layout = 'home' }: { layout?: Layout }) {
     document.body.style.overflow = '';
   }, []);
 
+  const goHome = useCallback(() => {
+    closeNav();
+    if (pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [closeNav, pathname]);
+
   const toggleNav = () => {
     setNavOpen((open) => {
       const next = !open;
@@ -45,7 +53,7 @@ export default function SiteHeader({ layout = 'home' }: { layout?: Layout }) {
   return (
     <header className={`site-header${navOpen ? ' nav-open' : ''}${scrolled ? ' is-scrolled' : ''}`}>
       <div className="container nav">
-        <Link to="/" className="logo" aria-label="Trò Chơi Dân Gian" onClick={closeNav}>
+        <Link to="/" className="logo" aria-label="Trò Chơi Dân Gian" onClick={goHome}>
           <span className="logo-mark">T</span>
           <span className="logo-text">
             <strong>Trò Chơi Dân Gian</strong>
@@ -56,7 +64,7 @@ export default function SiteHeader({ layout = 'home' }: { layout?: Layout }) {
         <nav id="primary-nav" aria-label="Điều hướng chính">
           <ul className="nav-menu">
             <li>
-              <Link to="/" onClick={closeNav}>
+              <Link to="/" onClick={goHome}>
                 Trang chủ
               </Link>
             </li>

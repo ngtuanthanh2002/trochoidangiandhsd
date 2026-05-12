@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useLayoutEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import SiteHeader from '../components/SiteHeader';
 import SiteFooter from '../components/SiteFooter';
 import IntroYoutube from '../components/IntroYoutube';
@@ -24,19 +24,28 @@ function useRevealOnMount() {
 }
 
 function useHashScroll() {
+  const { hash } = useLocation();
   useEffect(() => {
-    const { hash } = window.location;
     if (!hash) return;
     const id = hash.slice(1);
     requestAnimationFrame(() => {
       document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-  }, []);
+  }, [hash]);
+}
+
+function useScrollTopWhenNoHash() {
+  const { pathname, hash } = useLocation();
+  useLayoutEffect(() => {
+    if (pathname !== '/' || hash) return;
+    window.scrollTo(0, 0);
+  }, [pathname, hash]);
 }
 
 export default function HomePage() {
   useRevealOnMount();
   useHashScroll();
+  useScrollTopWhenNoHash();
 
   return (
     <>
